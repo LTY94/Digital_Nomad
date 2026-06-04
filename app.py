@@ -248,7 +248,7 @@ elif page == "🔍 頂級遊牧城市篩選器":
         st.dataframe(recommend_df.sort_values(by="Safety_Score", ascending=False))
         
         fig_rec = px.bar(recommend_df.head(30), x="City", y="Internet_Speed_Mbps", color="Cost_of_Living_USD",
-                         title="符合條件的前 30 個城市之網速與成本對比（顏色越偏藍代表成本越低）", color_continuous_scale="Blugrn")
+                         title="符合條件的前 30 個城市之網速與成本對比", color_continuous_scale="Blugrn")
         st.plotly_chart(fig_rec, use_container_width=True)
     else:
         st.warning(" 糟糕！沒有城市同時滿足這麼嚴苛的條件，請試著放寬預算或網速標準！")
