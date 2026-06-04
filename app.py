@@ -122,7 +122,6 @@ except Exception as e:
 # 3. 側邊欄選單設計
 # ==========================================
 st.sidebar.title("🌍 導覽選單")
-st.sidebar.markdown("請選擇您要查看的資料探勘維度：")
 page = st.sidebar.radio(
     "分析面向",
     ["📊 城市基本數據分布", "💰 成本與網速關聯分析", "🤖 機器學習：城市 AI 分群", "🔍 頂級遊牧城市篩選器"]
@@ -154,7 +153,7 @@ if page == "📊 城市基本數據分布":
         st.plotly_chart(fig_bar, use_container_width=True)
 
     st.markdown("---")
-    st.subheader("📋 原始探勘資料集摘要（真實 781 筆大數據）")
+    st.subheader("📋 原始探勘資料集摘要")
     st.dataframe(df.style.background_gradient(cmap='Blues', subset=['Cost_of_Living_USD', 'Internet_Speed_Mbps']))
 
 # ==========================================
@@ -185,7 +184,7 @@ elif page == "💰 成本與網速關聯分析":
 # 頁面 3：🤖 機器學習：城市 AI 分群
 # ==========================================
 elif page == "🤖 機器學習：城市 AI 分群":
-    st.header("📌 演算法專區：K-Means 城市自動群聚分析")
+    st.header("📌 K-Means 城市自動群聚分析")
     st.markdown("利用 **K-Means 機器學習演算法**，依據**生活成本、網速、安全、娛樂**四個維度，將全球 781 座城市進行多維空間分群。")
     
     k_clusters = st.slider("請選擇 K-Means 的分群數量 (K 值)", min_value=2, max_value=5, value=3)
@@ -216,7 +215,7 @@ elif page == "🤖 機器學習：城市 AI 分群":
     )
     st.plotly_chart(fig_cluster, use_container_width=True)
     
-    st.subheader("💡 探勘解密：各個群組的真實平均特徵矩陣")
+    st.subheader("💡各個群組的真實平均特徵矩陣")
     cluster_summary = df.groupby('Cluster')[features].mean().reset_index()
     st.dataframe(cluster_summary.style.format("{:.2f}", subset=features).background_gradient(cmap='YlOrRd'))
 
